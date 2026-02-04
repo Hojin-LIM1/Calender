@@ -2,7 +2,9 @@ package com.example.project.service;
 
 
 import com.example.project.dto.*;
+import com.example.project.entity.Comment;
 import com.example.project.entity.Schedule;
+import com.example.project.repository.CommentRepository;
 import com.example.project.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import java.util.List;
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
+    private final CommentRepository commentRepository;
+
     @Transactional
     public CreateScheduleResponse save(CreateScheduleRequest request) {
         Schedule schedule = new Schedule(request.getTitle(),
@@ -114,5 +118,6 @@ public class ScheduleService {
         scheduleRepository.delete(schedule);
 
     }
+
 
 }
