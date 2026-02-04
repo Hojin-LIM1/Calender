@@ -1,9 +1,7 @@
 package com.example.project.service;
 
 
-import com.example.project.dto.CreateScheduleRequest;
-import com.example.project.dto.CreateScheduleResponse;
-import com.example.project.dto.GetOneScheduleResponse;
+import com.example.project.dto.*;
 import com.example.project.entity.Schedule;
 import com.example.project.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +21,7 @@ public class ScheduleService {
         Schedule schedule = new Schedule(request.getTitle(),
                 request.getContents(),
                 request.getEditor(),
-                request.getCreateDate(),
-                request.getUpdateDate()
+                request.getPassword()
                 );
         Schedule savedSchedule = scheduleRepository.save(schedule);
 
@@ -73,6 +70,36 @@ public class ScheduleService {
             dtos.add(dto);
         }
         return dtos;
+    }
+
+
+    // 수정
+    @Transactional
+    public UpdateScheduleResponse update(Long scheduleId, UpdateScheduleRequest request) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalStateException("해당 일정은 존재하지 않습니다.")
+        );
+
+        //비밀번호 검증 로직 하나 더 추가
+        if (schedule.getPassword() !=null && !schedule.getPassword().equals(request.getPassword())){
+            throw new IllegalStateException("비밀번호 불일치로 수정할 수 없습니다.");
+        }
+
+        schedule.update(
+                request.getTitle(),
+                request.getContents(),
+                request.getEditor()
+                //request.getCreateDate() JPA Auditing으로 처리됨 안넣어도됨,.
+                //request.getUpdateDate()
+        );
+        return new UpdateScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContents(),
+                schedule.getEditor(),
+                schedule.getCreateDate(), //response에는 넣어야겠지?
+                schedule.getUpdateDate()
+        );
     }
 
 }

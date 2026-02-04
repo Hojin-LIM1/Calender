@@ -34,13 +34,21 @@ public class Schedule {
     @LastModifiedDate
     private LocalDateTime updateDate;
 
-    public Schedule(String title, String contents, String editor, LocalDateTime createDate, LocalDateTime updateDate) {
+    public Schedule(String title, String contents, String editor, Integer password) {
         this.title = title;
         this.contents = contents;
         this.editor = editor;
         this.password = password;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
+        //this.createDate = createDate; jpa auditing으로 미작성
+        //this.updateDate = updateDate;
+    }
+
+    public void update(String title, String contents, String editor) {
+        this.title = title;
+        this.contents = contents;
+        this.editor = editor;
+        //this.createDate = createDate;
+        //this.updateDate = updateDate;
     }
 
 }

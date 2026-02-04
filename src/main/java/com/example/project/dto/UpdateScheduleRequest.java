@@ -1,11 +1,15 @@
 package com.example.project.dto;
 
+
+import jakarta.persistence.Column;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class CreateScheduleRequest {
+public class UpdateScheduleRequest {
 
     private String title;
     private String contents;
@@ -13,4 +17,6 @@ public class CreateScheduleRequest {
     private Integer password;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+
 }
