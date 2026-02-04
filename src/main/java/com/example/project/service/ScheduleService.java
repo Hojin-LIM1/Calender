@@ -87,7 +87,6 @@ public class ScheduleService {
 
         schedule.update(
                 request.getTitle(),
-                request.getContents(),
                 request.getEditor()
                 //request.getCreateDate() JPA Auditing으로 처리됨 안넣어도됨,.
                 //request.getUpdateDate()
@@ -100,6 +99,20 @@ public class ScheduleService {
                 schedule.getCreateDate(), //response에는 넣어야겠지?
                 schedule.getUpdateDate()
         );
+    }
+
+    @Transactional
+    public void delete(Long scheduleId, Integer password) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalStateException("해당 일정은 존재하지 않습니다.")
+        );
+
+        if(!schedule.getPassword().equals(password)){
+            throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
+        }
+
+        scheduleRepository.delete(schedule);
+
     }
 
 }
