@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.time.LocalDateTime; //자바 8이후로
+import org.springframework.data.jpa.domain.support.AuditingEntityListener; //jpa Auditing 추가
+import java.time.LocalDateTime; //자바 8이후로 나온 날짜를 관리하기 위한 기능
 
 @Getter
 @Setter // 생성날짜를 함부로 수정하지 못하도록 setter 설정
