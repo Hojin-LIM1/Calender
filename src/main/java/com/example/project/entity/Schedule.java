@@ -34,7 +34,7 @@ public class Schedule {
     @LastModifiedDate
     private LocalDateTime updateDate;
 
-    public Schedule(String title, String contents, String editor, Integer password, String date) {
+    public Schedule(String title, String contents, String editor, Integer password, LocalDateTime createDate, LocalDateTime updateDate) {
         this.title = title;
         this.contents = contents;
         this.editor = editor;
