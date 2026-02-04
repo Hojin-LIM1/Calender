@@ -12,11 +12,8 @@ import java.time.LocalDateTime;
 public class UpdateScheduleRequest {
 
     private String title;
-    private String contents;
     private String editor;
     private Integer password;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
 
 }

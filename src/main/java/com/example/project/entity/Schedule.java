@@ -43,9 +43,9 @@ public class Schedule {
         //this.updateDate = updateDate;
     }
 
-    public void update(String title, String contents, String editor) {
+    public void update(String title, String editor) {
         this.title = title;
-        this.contents = contents;
+        //this.contents = contents; 조건에 없음
         this.editor = editor;
         //this.createDate = createDate;
         //this.updateDate = updateDate;
