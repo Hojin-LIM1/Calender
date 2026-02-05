@@ -36,8 +36,11 @@ public class ScheduleController {
 
     //다건조회
     @GetMapping("/schedule")
-    public ResponseEntity<List<GetOneScheduleResponse>> getAllSchedule() {
-        List<GetOneScheduleResponse> result = scheduleService.getAll();
+    public ResponseEntity<List<GetOneScheduleResponse>> getAllSchedule(
+
+            @RequestParam(required = false) String editor
+    ) {
+        List<GetOneScheduleResponse> result = scheduleService.getAll(editor);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -63,7 +66,7 @@ public class ScheduleController {
     // LV6구현 일정 단건 조회 업그레이드
     @GetMapping("/schedule/{scheduleId}")
     public ResponseEntity<ScheduleAndCommentResponse> getScheduleAndComments(@PathVariable Long scheduleId) {
-        ScheduleAndCommentResponse result = scheduleService.getScchedule(scheduleId);
+        ScheduleAndCommentResponse result = scheduleService.getSchedule(scheduleId);
         return ResponseEntity.status(HttpStatus.OK).body(result);
 
     }

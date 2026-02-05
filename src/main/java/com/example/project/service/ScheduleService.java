@@ -58,8 +58,17 @@ public class ScheduleService {
 
     // 다건 조회
     @Transactional(readOnly = true)
-    public List<GetOneScheduleResponse> getAll() {
-        List<Schedule> schedules = scheduleRepository.findAll();
+    public List<GetOneScheduleResponse> getAll(String editor) {
+        List<Schedule> schedules;
+
+        if (editor != null && !editor.isEmpty()) {
+
+            schedules = scheduleRepository.findAllByEditorOrderByUpdateDateDesc(editor);
+
+        }else{
+
+                schedules = scheduleRepository.findAllByOrderByUpdateDateDesc();
+            }
 
         List<GetOneScheduleResponse> dtos = new ArrayList<>();
         for(Schedule schedule : schedules) {
@@ -120,7 +129,7 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public ScheduleAndCommentResponse getScchedule(Long scheduleId){
+    public ScheduleAndCommentResponse getSchedule(Long scheduleId){
         //1.일정 조회(예외처리 추가)
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow( () -> new IllegalStateException("해당 일정은 존재하지 않습니다."));
