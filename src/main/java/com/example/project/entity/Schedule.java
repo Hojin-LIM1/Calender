@@ -9,6 +9,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener; //jpa Auditing 추가
 import java.time.LocalDateTime; //자바 8이후로 나온 날짜를 관리하기 위한 기능
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter // 생성날짜를 함부로 수정하지 못하도록 setter 설정
@@ -50,6 +52,11 @@ public class Schedule {
         //this.createDate = createDate;
         //this.updateDate = updateDate;
     }
+
+
+    //매우 중요 1:다 인데  mappedBy = "schedule"로 스케줄이랑 연결해주고
+    @OneToMany(mappedBy = "schedule", cascade=CascadeType.REMOVE)
+    private List<Comment> comments = new ArrayList<>();
 
 }
 

@@ -60,5 +60,12 @@ public class ScheduleController {
     }
 
 
+    // LV6구현 일정 단건 조회 업그레이드
+    @GetMapping("/schedule/{scheduleId}")
+    public ResponseEntity<ScheduleAndCommentResponse> getScheduleAndComments(@PathVariable Long scheduleId) {
+        ScheduleAndCommentResponse result = scheduleService.getScchedule(scheduleId);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+
+    }
 
 }

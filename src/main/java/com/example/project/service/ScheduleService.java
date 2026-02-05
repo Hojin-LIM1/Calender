@@ -119,5 +119,29 @@ public class ScheduleService {
 
     }
 
+    @Transactional(readOnly = true)
+    public ScheduleAndCommentResponse getScchedule(Long scheduleId){
+        //1.일정 조회(예외처리 추가)
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow( () -> new IllegalStateException("해당 일정은 존재하지 않습니다."));
+
+        List<CommentForScheduleResponse> commentForScheduleResponses = schedule.getComments().stream()
+                .map(comment -> new CommentForScheduleResponse(
+                        comment.getId(),
+                        comment.getContents(),
+                        comment.getUsername()
+                ))
+                .toList();
+
+        return new ScheduleAndCommentResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContents(),
+                schedule.getEditor(),
+                commentForScheduleResponses
+
+        );
+    }
+
 
 }
