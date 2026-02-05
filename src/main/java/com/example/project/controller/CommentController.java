@@ -16,7 +16,7 @@ public class CommentController {
 
         private final CommentService commentService;
 
-        @PostMapping("/schedule/comments")
+        @PostMapping("/schedule/scheduleId/comments")
         public ResponseEntity<CreateCommentResponse> CreateComment (
                 @RequestBody CreateCommentRequest request
                 ) {
